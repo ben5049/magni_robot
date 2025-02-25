@@ -25,6 +25,7 @@
   <xacro:include filename="$(find magni_description)/urdf/sensors/sonar_hc-sr04.xacro" />
   <xacro:include filename="$(find magni_description)/urdf/sensors/raspi_camera.xacro" />
   <xacro:include filename="$(find magni_description)/urdf/sensors/ur50_lidar.xacro" />
+  <xacro:include filename="$(find magni)/urdf/sensors/rplidar.xacro" />
 
 
 
@@ -234,12 +235,10 @@
   </xacro:if>
 
   <!-- Define Lidar -->
-  <xacro:if value="${lidar_extrinsics_file != ''}">
-    <xacro:property name="lidar_extrinsics" value="${load_yaml(lidar_extrinsics_file)}"/>
-    <xacro:ur50_lidar name="laser" connected_to="base_link">
-      <origin xyz="${lidar_extrinsics['x']} ${lidar_extrinsics['y']} ${lidar_extrinsics['z']}"
-        rpy="${lidar_extrinsics['roll']} ${lidar_extrinsics['pitch']} ${lidar_extrinsics['yaw']}"/>
-    </xacro:ur50_lidar>
-  </xacro:if>
+
+  <xacro:rplidar name="laser" connected_to="base_link">
+      <origin xyz="0.09 0 0.21"
+        rpy="0 0 0"/>
+  </xacro:rplidar>
 
 </robot>
