@@ -1,12 +1,12 @@
 <launch>
-  <arg name="tower_installed" default="false"/>
-  <arg name="shell_installed" default="false"/>
-  <arg name="sonars_installed" default="true"/>
-  <arg name="camera_extrinsics_file" default=""/>
-  <arg name="lidar_extrinsics_file" default=""/>
+  <arg name="tower_installed" default="false" />
+  <arg name="shell_installed" default="false" />
+  <arg name="sonars_installed" default="true" />
+  <arg name="camera_extrinsics_file" default="" />
+  <arg name="lidar_extrinsics_file" default="" />
 
-  <param name="robot_description" 
-      command="$(find xacro)/xacro --inorder
+  <param name="robot_description"
+    command="$(find xacro)/xacro --inorder
         '$(find magni_description)/urdf/magni.urdf.xacro' 
         tower_installed:=$(arg tower_installed)
         shell_installed:=$(arg shell_installed)
@@ -16,14 +16,38 @@
         "
   />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
 
+  <launch>
+    <node name="rplidarNode" pkg="rplidar_ros" type="rplidarNode" output="screen">
+      <param name="serial_port" type="string" value="/dev/ttyUSB0" />
+      <param name="serial_baudrate" type="int" value="256000" />
+      <param name="frame_id" type="string" value="laser" />
+      <param name="inverted" type="bool" value="false" />
+      <param name="angle_compensate" type="bool" value="true" />
+    </node>
+  </launch>
+  <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen">
+    <param name="video_device" value="/dev/video0" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="yuyv" />
+    <param name="color_format" value="yuv422p" />
+    <param name="camera_frame_id" value="usb_cam" />
+    <param name="io_method" value="mmap" />
+  </node>
+  <node name="image_view" pkg="image_view" type="image_view" respawn="false">
+    <remap from="image" to="/usb_cam/image_raw" />
+    <param name="autosize" value="true" />
+  </node>
 
-  <!-- if tower is installed, enable laser filters node in order the robot to not detect itself with lidars -->
+  <!-- if tower is installed, enable laser filters node in order the robot to not detect itself with
+  lidars -->
   <group if="$(arg tower_installed)">
     <node pkg="laser_filters" type="scan_to_scan_filter_chain" output="screen" name="laser_filter">
       <param name="target_frame" value="laser" />
-      <rosparam command="load" file="$(find magni_description)/config/laser_filter_chain.yaml"/>
+      <rosparam command="load" file="$(find magni_description)/config/laser_filter_chain.yaml" />
     </node>
   </group>
-  
+
 </launch>
