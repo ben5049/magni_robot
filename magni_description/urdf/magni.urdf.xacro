@@ -26,6 +26,7 @@
   <xacro:include filename="$(find magni_description)/urdf/sensors/raspi_camera.xacro" />
   <xacro:include filename="$(find magni_description)/urdf/sensors/ur50_lidar.xacro" />
   <xacro:include filename="$(find magni_description)/urdf/sensors/rplidar.xacro" />
+  <xacro:include filename="$(find magni_description)/urdf/sensors/oak-d.xacro" />
 
 
 
@@ -234,6 +235,10 @@
     </xacro:raspi_camera>
   </xacro:if>
 
+  <xacro:oak-d name="oakd" connected_to="base_link">
+    <origin xyz="0.125 0 0.093"
+      rpy="0 0 0" />
+  </xacro:oak-d>
   <!-- Define Lidar -->
 
   <xacro:rplidar name="laser" connected_to="base_link">
