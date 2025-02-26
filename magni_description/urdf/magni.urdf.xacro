@@ -238,7 +238,7 @@
 
   <xacro:rplidar name="laser" connected_to="base_link">
       <origin xyz="0.09 0 0.21"
-        rpy="0 0 0"/>
+        rpy="0 0 ${pi}"/>
   </xacro:rplidar>
 
 </robot>
