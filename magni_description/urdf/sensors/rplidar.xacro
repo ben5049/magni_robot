@@ -13,7 +13,7 @@
 
   <link name="${name}">
     <visual>
-      <origin xyz="0 0 -0.03" rpy="0 0 ${pi/2}" />
+      <origin xyz="0 0 -0.03" rpy="0 0 ${-pi/2}" />
       <geometry>
         <mesh filename="package://magni_description/meshes/sensors/RPLIDAR.stl" />
       </geometry>
@@ -32,7 +32,7 @@
     <sensor type="ray" name="${name}_sensor">
       <pose>0 0 0 0 0 0</pose>
       <visualize>false</visualize>
-      <update_rate>20</update_rate>
+      <update_rate>10</update_rate>
       <ray>
         <scan>
           <horizontal>
