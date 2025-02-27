@@ -1,6 +1,7 @@
 <launch>
 
   <arg name="map_file" default="$(find magni_nav)/maps/blank_map.yaml"/>
+  <arg name="transform_publish_period" value="0" />
 
   <!-- Run the map server -->
   <node pkg="tf" type="static_transform_publisher" name="odom_to_map" args="0.0 0 0  0 0 0  /map /odom 100" />
