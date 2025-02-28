@@ -42,12 +42,10 @@
 
   <!-- if tower is installed, enable laser filters node in order the robot to not detect itself with
   lidars -->
-  <group if="$(arg tower_installed)">
-    <node pkg="laser_filters" type="scan_to_scan_filter_chain" output="screen" name="laser_filter">
-      <param name="target_frame" value="laser" />
-      <rosparam command="load" file="$(find magni_description)/config/laser_filter_chain.yaml" />
-    </node>
-  </group>
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain" output="screen" name="laser_filter">
+    <param name="target_frame" value="laser" />
+    <rosparam command="load" file="$(find magni_description)/config/laser_filter_chain.yaml" />
+  </node>
 
 
 
