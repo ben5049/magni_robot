@@ -5,6 +5,7 @@
   <!-- Run the map server -->
   <node name="map_server" pkg="map_server" type="map_server" args="$(find magni_nav)/maps/mymap.yaml" />
   <node pkg="tf" type="static_transform_publisher" name="odom_to_map" args="0.0 0 0  0 0 0  /map /odom 100" />
+  <include file="$(find amcl)/examples/amcl_diff.launch" />
 
 
 
