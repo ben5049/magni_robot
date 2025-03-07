@@ -1,8 +1,23 @@
 scan_filter_chain:
-- name: right_pillar
-  type: laser_filters/LaserScanAngularBoundsFilter
+- name: left_front_pilar
+  type: laser_filters/LaserScanAngularBoundsFilterInPlace
   params:
-    lower_angle: -0.5
-    upper_angle: 0
+    lower_angle: -1.234
+    upper_angle: -0.896
+- name: left_back_pilar
+  type: laser_filters/LaserScanAngularBoundsFilterInPlace
+  params:
+    lower_angle: -0.409
+    upper_angle: -0.356
+- name: right_front_pilar
+  type: laser_filters/LaserScanAngularBoundsFilterInPlace
+  params:
+    lower_angle: 0.896
+    upper_angle: 1.234
+- name: right_back_pilar
+  type: laser_filters/LaserScanAngularBoundsFilterInPlace
+  params:
+    lower_angle: 0.356
+    upper_angle: 0.409
 
 # more filter options can be found: http://wiki.ros.org/laser_filters
