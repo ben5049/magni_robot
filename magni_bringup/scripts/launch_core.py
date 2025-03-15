@@ -10,7 +10,8 @@ from collections import abc
 rp = rospkg.RosPack()
 
 # Path to the robot.yaml on the robot (not tracked by git)
-conf_path = "/etc/ubiquity/robot.yaml"
+conf_path = ""
+# NOTE: this has been set empty so it uses our yaml file rather than the default
 
 # Path to the default_robot.yaml config inside magni_robot repo (git tracked)
 default_conf_path = rp.get_path("magni_bringup") + "/config/default_robot.yaml"

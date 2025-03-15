@@ -1,13 +1,12 @@
 <launch>
 
-  <arg name="map_file" default="$(find magni_nav)/maps/blank_map.yaml"/>
-  <arg name="transform_publish_period" value="0" />
-  <arg name="map_update_interval" value="2.5"/>
+  <arg name="map_file" default="$(find magni_nav)/maps/fyp_area.yaml"/>
+
   <!-- Run the map server -->
-  <node pkg="tf" type="static_transform_publisher" name="odom_to_map" args="0.0 0 0  0 0 0  /map /odom 100" />
-  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
-        <remap from="scan" to="scan"/>
-  </node>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find magni_nav)/maps/fyp_area.yaml" />
+  <!-- <node pkg="tf" type="static_transform_publisher" name="odom_to_map" args="0.0 0 0  0 0 0  /map /odom 100" /> -->
+  <include file="$(find magni_nav)/launch/amcl_diff.launch" />
+
 
 
 
@@ -17,7 +16,6 @@
     <rosparam file="$(find magni_nav)/param/local_costmap_param.yaml" command="load" />
     <rosparam file="$(find magni_nav)/param/global_costmap_param.yaml" command="load" />
     <rosparam file="$(find magni_nav)/param/base_local_planner_param.yaml" command="load" />
-
   </node>
 
 
