@@ -2,7 +2,7 @@ scan_filter_chain:
 - name: left_front_pilar
   type: laser_filters/LaserScanAngularBoundsFilterInPlace
   params:
-    lower_angle: -1.234
+    lower_angle: -1.4
     upper_angle: -0.896
 - name: left_back_pilar
   type: laser_filters/LaserScanAngularBoundsFilterInPlace
@@ -13,7 +13,7 @@ scan_filter_chain:
   type: laser_filters/LaserScanAngularBoundsFilterInPlace
   params:
     lower_angle: 0.896
-    upper_angle: 1.234
+    upper_angle: 1.4
 - name: right_back_pilar
   type: laser_filters/LaserScanAngularBoundsFilterInPlace
   params:

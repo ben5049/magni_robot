@@ -1,7 +1,8 @@
 {
-    "pose_1":
+    "start":
         {
             "frame_id": "map",
+            "neighbours": ["chokepoint"],
             "position":
                 {
                     "x": 0.21899640560150146,
@@ -17,9 +18,10 @@
                 }
             
         },
-    "pose_2":
+    "chokepoint":
         {
             "frame_id": "map",
+            "neighbours": ["start", "chokepoint_reversed"],
             "position":
                 {
                     "x": 0.6294181942939758,
@@ -35,9 +37,10 @@
                 }
             
         },
-    "pose_3":
+    "chokepoint_reversed":
         {
             "frame_id": "map",
+            "neighbours": ["chokepoint"],
             "position":
                 {
                     "x": 0.6294181942939758,
