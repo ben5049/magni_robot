@@ -1,58 +1,343 @@
 {
-    "start":
-        {
-            "frame_id": "map",
-            "neighbours": ["chokepoint"],
-            "position":
-                {
-                    "x": 0.21899640560150146,
-                    "y": 0.9153054356575012,
-                    "z": 0.0
-                },
-            "orientation":
-                {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.8328054481274818,
-                    "w": 0.5535657915453088
-                }
-            
+    "start": {
+        "frame_id": "map",
+        "neighbours": [
+            "chokepoint",
+            "desk_3_4_approach",
+            "desk_7_8_approach",
+            "box_parallel",
+            "start_reversed"
+        ],
+        "position": {
+            "x": 0.21899640560150146,
+            "y": 0.9153054356575012,
+            "z": 0.0
         },
-    "chokepoint":
-        {
-            "frame_id": "map",
-            "neighbours": ["start", "chokepoint_reversed"],
-            "position":
-                {
-                    "x": 0.6294181942939758,
-                    "y": -0.33807703852653503,
-                    "z": 0.0
-                },
-            "orientation":
-                {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": -0.5493994845115673,
-                    "w": 0.8355598161821954
-                }
-            
-        },
-    "chokepoint_reversed":
-        {
-            "frame_id": "map",
-            "neighbours": ["chokepoint"],
-            "position":
-                {
-                    "x": 0.6294181942939758,
-                    "y": -0.33807703852653503,
-                    "z": 0.0
-                },
-            "orientation":
-                {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.8305668646188307,
-                    "w": 0.5569189199490757
-                }
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.8328054481274818,
+            "w": 0.5535657915453088
         }
+    },
+    "start_reversed": {
+        "frame_id": "map",
+        "neighbours": [
+            "chokepoint",
+            "desk_3_4_approach",
+            "desk_7_8_approach",
+            "box_parallel",
+            "start"
+        ],
+        "position": {
+            "x": 0.5713174343109131,
+            "y": 0.11289358139038086,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.5451225481920562,
+            "w": 0.8383563725842366
+        }
+    },
+    "chokepoint": {
+        "frame_id": "map",
+        "neighbours": [
+            "start",
+            "chokepoint_reversed"
+        ],
+        "position": {
+            "x": 0.6294181942939758,
+            "y": -0.33807703852653503,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.5493994845115673,
+            "w": 0.8355598161821954
+        }
+    },
+    "chokepoint_reversed": {
+        "frame_id": "map",
+        "neighbours": [
+            "chokepoint"
+        ],
+        "position": {
+            "x": 0.6294181942939758,
+            "y": -0.33807703852653503,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.8305668646188307,
+            "w": 0.5569189199490757
+        }
+    },
+    "desk_3_4_approach": {
+        "frame_id": "map",
+        "neighbours": [
+            "desk_3_4",
+            "desk_3_4_departure"
+        ],
+        "position": {
+            "x": 0.939954400062561,
+            "y": 0.5990587472915649,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.19387330214378576,
+            "w": 0.9810265759477999
+        }
+    },
+    "desk_3_4": {
+        "frame_id": "map",
+        "neighbours": [
+            "desk_3_4_reversed"
+        ],
+        "position": {
+            "x": 1.3615756034851074,
+            "y": 0.7808133363723755,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.19387330214378576,
+            "w": 0.9810265759477999
+        }
+    },
+    "desk_3_4_reversed": {
+        "frame_id": "map",
+        "neighbours": [
+            "desk_3_4_departure",
+            "desk_3_4_approach"
+        ],
+        "position": {
+            "x": 1.2210479974746704,
+            "y": 0.7202407121658325,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.9831515181712297,
+            "w": 0.1827924843028458
+        }
+    },
+    "desk_3_4_departure": {
+        "frame_id": "map",
+        "neighbours": [
+            "start",
+            "desk_7_8_approach",
+            "desk_3_4_approach",
+            "chokepoint",
+            "start_reversed"
+        ],
+        "position": {
+            "x": 0.7681504487991333,
+            "y": 0.5194079875946045,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.9831515181712297,
+            "w": 0.1827924843028458
+        }
+    },
+    "desk_7_8_approach": {
+        "frame_id": "map",
+        "neighbours": [
+            "desk_7_8",
+            "desk_7_8_departure"
+        ],
+        "position": {
+            "x": 0.03195296227931976,
+            "y": 0.17728257179260254,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.9829949426223489,
+            "w": 0.18363262994055574
+        }
+    },
+    "desk_7_8": {
+        "frame_id": "map",
+        "neighbours": [
+            "desk_7_8_reversed"
+        ],
+        "position": {
+            "x": -0.4262199401855469,
+            "y": -0.0649455189704895,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.9834985511485975,
+            "w": 0.18091600230109414
+        }
+    },
+    "desk_7_8_reversed": {
+        "frame_id": "map",
+        "neighbours": [
+            "desk_7_8",
+            "desk_7_8_departure"
+        ],
+        "position": {
+            "x": -0.36502864956855774,
+            "y": -0.05992400646209717,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.19445731809064645,
+            "w": 0.9809109803855767
+        }
+    },
+    "desk_7_8_departure": {
+        "frame_id": "map",
+        "neighbours": [
+            "start",
+            "desk_7_8_approach",
+            "desk_3_4_approach",
+            "chokepoint",
+            "start_reversed"
+        ],
+        "position": {
+            "x": -0.07067044079303741,
+            "y": 0.06165413558483124,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.19445731809064645,
+            "w": 0.9809109803855767
+        }
+    },
+    "box_parallel": {
+        "frame_id": "map",
+        "neighbours": [
+            "box_approach",
+            "box_parallel_reversed"
+        ],
+        "position": {
+            "x": -0.064984530210495,
+            "y": 2.541663885116577,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.8345372881842676,
+            "w": 0.5509514630437501
+        }
+    },
+    "box_parallel_reversed": {
+        "frame_id": "map",
+        "neighbours": [
+            "box_approach",
+            "box_parallel",
+            "start_reversed"
+        ],
+        "position": {
+            "x": -0.064984530210495,
+            "y": 2.541663885116577,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.5493994845115673,
+            "w": 0.8355598161821954
+        }
+    },
+    "box_approach": {
+        "frame_id": "map",
+        "neighbours": [
+            "box",
+            "box_departure"
+        ],
+        "position": {
+            "x": -0.07540413737297058,
+            "y": 2.532482862472534,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.9821352504783198,
+            "w": 0.188176379410084
+        }
+    },
+    "box": {
+        "frame_id": "map",
+        "neighbours": [
+            "box_reversed"
+        ],
+        "position": {
+            "x": -0.5401588678359985,
+            "y": 2.3001673221588135,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.9830215732780277,
+            "w": 0.18349001735786935
+        },
+        "actions": [
+            {
+                "action": "reverse",
+                "when": "departure",
+                "duration": 1
+            }
+        ]
+    },
+    "box_reversed": {
+        "frame_id": "map",
+        "neighbours": [
+            "box",
+            "box_departure"
+        ],
+        "position": {
+            "x": -0.5401588678359985,
+            "y": 2.3001673221588135,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.19445731809064645,
+            "w": 0.9809109803855767
+        }
+    },
+    "box_departure": {
+        "frame_id": "map",
+        "neighbours": [
+            "box_approach",
+            "box_parallel",
+            "box_parallel_reversed"
+        ],
+        "position": {
+            "x": -0.07540413737297058,
+            "y": 2.532482862472534,
+            "z": 0.0
+        },
+        "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.19445731809064645,
+            "w": 0.9809109803855767
+        }
+    }
 }

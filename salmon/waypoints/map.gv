@@ -1,0 +1,66 @@
+digraph map {
+	start
+	start -> chokepoint
+	start -> desk_3_4_approach
+	start -> desk_7_8_approach
+	start -> box_parallel
+	start -> start_reversed
+	start_reversed
+	start_reversed -> chokepoint
+	start_reversed -> desk_3_4_approach
+	start_reversed -> desk_7_8_approach
+	start_reversed -> box_parallel
+	start_reversed -> start
+	chokepoint
+	chokepoint -> start
+	chokepoint -> chokepoint_reversed
+	chokepoint_reversed
+	chokepoint_reversed -> chokepoint
+	desk_3_4_approach
+	desk_3_4_approach -> desk_3_4
+	desk_3_4_approach -> desk_3_4_departure
+	desk_3_4
+	desk_3_4 -> desk_3_4_reversed
+	desk_3_4_reversed
+	desk_3_4_reversed -> desk_3_4_departure
+	desk_3_4_reversed -> desk_3_4_approach
+	desk_3_4_departure
+	desk_3_4_departure -> start
+	desk_3_4_departure -> desk_7_8_approach
+	desk_3_4_departure -> desk_3_4_approach
+	desk_3_4_departure -> chokepoint
+	desk_3_4_departure -> start_reversed
+	desk_7_8_approach
+	desk_7_8_approach -> desk_7_8
+	desk_7_8_approach -> desk_7_8_departure
+	desk_7_8
+	desk_7_8 -> desk_7_8_reversed
+	desk_7_8_reversed
+	desk_7_8_reversed -> desk_7_8
+	desk_7_8_reversed -> desk_7_8_departure
+	desk_7_8_departure
+	desk_7_8_departure -> start
+	desk_7_8_departure -> desk_7_8_approach
+	desk_7_8_departure -> desk_3_4_approach
+	desk_7_8_departure -> chokepoint
+	desk_7_8_departure -> start_reversed
+	box_parallel
+	box_parallel -> box_approach
+	box_parallel -> box_parallel_reversed
+	box_parallel_reversed
+	box_parallel_reversed -> box_approach
+	box_parallel_reversed -> box_parallel
+	box_parallel_reversed -> start_reversed
+	box_approach
+	box_approach -> box
+	box_approach -> box_departure
+	box
+	box -> box_reversed
+	box_reversed
+	box_reversed -> box
+	box_reversed -> box_departure
+	box_departure
+	box_departure -> box_approach
+	box_departure -> box_parallel
+	box_departure -> box_parallel_reversed
+}

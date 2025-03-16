@@ -4,7 +4,6 @@ import rospy
 from geometry_msgs.msg import PoseStamped, Pose, Point, Quaternion
 from move_base_msgs.msg import MoveBaseActionResult
 from std_msgs.msg import Header, String
-import json
 import os
 from json import load
 from copy import deepcopy
@@ -139,7 +138,7 @@ def talker():
     rate = rospy.Rate(1) # 10hz
 
     while not rospy.is_shutdown():
-        if goal_reached:
+        if goal_reached and waypoints_list:
             print(f"Current waypoint is {nav.current_waypoint}")
             waypoints_list.remove(waypoints_list[0])
             try:
