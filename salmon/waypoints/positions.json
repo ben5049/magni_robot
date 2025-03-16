@@ -2,7 +2,6 @@
     "start": {
         "frame_id": "map",
         "neighbours": [
-            "chokepoint",
             "desk_3_4_approach",
             "desk_7_8_approach",
             "box_parallel",
@@ -44,7 +43,6 @@
     "chokepoint": {
         "frame_id": "map",
         "neighbours": [
-            "start",
             "chokepoint_reversed"
         ],
         "position": {
@@ -62,7 +60,8 @@
     "chokepoint_reversed": {
         "frame_id": "map",
         "neighbours": [
-            "chokepoint"
+            "chokepoint",
+            "start"
         ],
         "position": {
             "x": 0.6294181942939758,
@@ -115,7 +114,7 @@
         "frame_id": "map",
         "neighbours": [
             "desk_3_4_departure",
-            "desk_3_4_approach"
+            "desk_3_4"
         ],
         "position": {
             "x": 1.2210479974746704,
@@ -280,7 +279,8 @@
     "box": {
         "frame_id": "map",
         "neighbours": [
-            "box_reversed"
+            "box_reversed",
+            "box_departure"
         ],
         "position": {
             "x": -0.5401588678359985,

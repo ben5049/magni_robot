@@ -1,6 +1,5 @@
 digraph map {
 	start
-	start -> chokepoint
 	start -> desk_3_4_approach
 	start -> desk_7_8_approach
 	start -> box_parallel
@@ -12,9 +11,10 @@ digraph map {
 	start_reversed -> box_parallel
 	start_reversed -> start
 	chokepoint
-	chokepoint -> start
+	chokepoint -> chokepoint_reversed
 	chokepoint_reversed
 	chokepoint_reversed -> chokepoint
+	chokepoint_reversed -> start
 	desk_3_4_approach
 	desk_3_4_approach -> desk_3_4
 	desk_3_4_approach -> desk_3_4_departure
@@ -22,7 +22,7 @@ digraph map {
 	desk_3_4 -> desk_3_4_reversed
 	desk_3_4_reversed
 	desk_3_4_reversed -> desk_3_4_departure
-	desk_3_4_reversed -> desk_3_4_approach
+	desk_3_4_reversed -> desk_3_4
 	desk_3_4_departure
 	desk_3_4_departure -> start
 	desk_3_4_departure -> desk_7_8_approach
@@ -53,6 +53,7 @@ digraph map {
 	box_approach -> box_departure
 	box
 	box -> box_reversed
+	box -> box_departure
 	box_reversed
 	box_reversed -> box
 	box_reversed -> box_departure
