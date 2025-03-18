@@ -2,7 +2,7 @@
 TrajectoryPlannerROS:
   # Robot Configuration Parameters - Kobuki
   max_vel_x: 0.25  # 0.55
-  min_vel_x: -0.25 
+  min_vel_x: 0.0
 
   max_vel_y: 0.0  # diff drive robot
   min_vel_y: 0.0  # diff drive robot
@@ -15,8 +15,8 @@ TrajectoryPlannerROS:
   #   do not set min_trans_vel to 0.0 otherwise dwa will always think translational velocities
   #   are non-negligible and small in place rotational velocities will be created.
 
-  max_rot_vel: 2.5  # choose slightly less than the base's capability
-  min_rot_vel: 0.4  # this is the min angular velocity when there is negligible translational velocity
+  max_rot_vel: 0.8  # choose slightly less than the base's capability
+  min_rot_vel: 0.2  # this is the min angular velocity when there is negligible translational velocity
   rot_stopped_vel: 0.4
 
   acc_lim_x: 0.4 # maximum is theoretically 2.0, but we 
@@ -24,13 +24,13 @@ TrajectoryPlannerROS:
   acc_lim_y: 0.0      # diff drive robot
 
   # Goal Tolerance Parameters
-  yaw_goal_tolerance: 0.1  # 0.05
+  yaw_goal_tolerance: 0.05  # 0.05
   xy_goal_tolerance: 0.1  # 0.10
   # latch_xy_goal_tolerance: false
 
   # Forward Simulation Parameters
   sim_time: 1.0       # 1.7
-  vx_samples: 6       # 3
+  vx_samples: 3       # 3
   vy_samples: 1       # diff drive robot, there is only one sample
   vtheta_samples: 20  # 20
 
@@ -50,10 +50,10 @@ TrajectoryPlannerROS:
   publish_traj_pc : true
   publish_cost_grid_pc: true
   global_frame_id: map
+  holonomic_robot: false
 
 
 # Differential-drive robot configuration - necessary?
 #  holonomic_robot: false
 base_local_planner: "base_local_planner/TrajectoryPlannerROS"
 # Differential-drive robot configuration - necessary?
-#  holonomic_robot: false

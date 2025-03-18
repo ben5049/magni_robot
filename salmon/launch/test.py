@@ -1,18 +1,38 @@
 #!/usr/bin/env python
 
 import rospy
-from geometry_msgs.msg import PoseStamped, Pose, Point, Quaternion
+from geometry_msgs.msg import PoseStamped, Pose, Twist
 from move_base_msgs.msg import MoveBaseActionResult
 from std_msgs.msg import Header, String
 import os
 from json import load
 from copy import deepcopy
+from time import sleep
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 
 class Nav():
 
     JSON_KEY_POSITION = "position"
     JSON_KEY_ORIENTATION = "orientation"
     JSON_KEY_NEIGHBOURS = "neighbours"
+    KEY_NAME = "name"
+    JSON_KEY_ACTIONS = "actions"
+    JSON_KEY_ACTION = "action"
+    ACTION_REVERSE = "reverse"
+    JSON_KEY_WHEN = "when"
+    ACTION_WHEN_DEPARTURE = "departure"
+    JSON_KEY_DURATION = "duration"
 
     def __init__(self, waypoints_file, starting_waypoint ="start"):
         
@@ -38,7 +58,7 @@ class Nav():
         poses = []
         for waypoint in path:
             pose = deepcopy(self.waypoints[waypoint])
-            pose["name"] = waypoint
+            pose[Nav.KEY_NAME] = waypoint
             pose.pop(Nav.JSON_KEY_NEIGHBOURS)
             poses.append(pose)
 
@@ -112,8 +132,23 @@ def waypointCallback(data):
     print(f"Current waypoint is {nav.current_waypoint}")
     waypoints_list=nav.navigate_to_waypoint(target_waypoint)
     
+def reverse(publisher, duration, speed=0.2, cmd_topic_hz=20):
+    print(f"Reversing for {duration}s at {speed}m/s")
+    t = Twist()
+    t.linear.x = -abs(speed if speed <= 0.2 else 0.2)
+    t.linear.y = 0
+    t.linear.z = 0
+    t.angular.x = 0
+    t.angular.y = 0
+    t.angular.z = 0
+    rate = rospy.Rate(cmd_topic_hz)
+    for i in range(int(duration*cmd_topic_hz)):
+        publisher.publish(t)
+        rate.sleep()
+    t.linear.x = 0
+    publisher.publish(t)
 
-def publishPose(pose, publisher):
+def publishPose(publisher, pose):
     h = Header()
     h.stamp = rospy.Time.now()
     h.frame_id = pose['frame_id']
@@ -128,27 +163,56 @@ def publishPose(pose, publisher):
     message = PoseStamped(h,p)
     publisher.publish(message)
 
+def publish_finished(publisher):
+    s = String()
+    s.data = "SALMON Move finished"
+    publisher.publish(s)
+
+
 def talker():
     global goal_reached
     global waypoints_list
-    pub = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
+    pub_goal = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
     sub = rospy.Subscriber('/move_base/result', MoveBaseActionResult, statusCallback)
-    subWaypoint = rospy.Subscriber('/goal_waypoint', String, waypointCallback)
+
+    # Used for reversing
+    pub_cmd_velocity = rospy.Publisher('/cmd_vel', Twist)
+    
+    pub_finished = rospy.Publisher('/salmon/finished', String, queue_size=10)
+    subWaypoint = rospy.Subscriber('/salmon/goal_waypoint', String, waypointCallback)
+
     rospy.init_node('PoseConductor', anonymous=True)
-    rate = rospy.Rate(1) # 10hz
+    rate = rospy.Rate(0.1)
 
     while not rospy.is_shutdown():
+
         if goal_reached and waypoints_list:
             print(f"Current waypoint is {nav.current_waypoint}")
+
+            # Implement actions on depature
+            if len(waypoints_list) > 1 and Nav.JSON_KEY_ACTIONS in waypoints_list[0].keys():
+                actions = [action for action in waypoints_list[0][Nav.JSON_KEY_ACTIONS] if action[Nav.JSON_KEY_WHEN] == Nav.ACTION_WHEN_DEPARTURE]
+                for action_struct in actions:
+                    action = action_struct[Nav.JSON_KEY_ACTION]
+                    if action == Nav.ACTION_REVERSE:
+                        reverse(publisher=pub_cmd_velocity,
+                                duration=action_struct[Nav.JSON_KEY_DURATION])
+            
             waypoints_list.remove(waypoints_list[0])
             try:
-                print(f"Goal Reached, going to next waypoint: {waypoints_list[0]['name']}")
+                print(f"Goal Reached, going to next waypoint: {waypoints_list[0][Nav.KEY_NAME]}")
             except:
-                print("Move finished")
+                print(bcolors.OKGREEN + "Move finished" + bcolors.ENDC)
+                publish_finished(pub_finished)
+                print("sent finished message")
+                
             goal_reached = False
         if waypoints_list:
             current_waypoint = waypoints_list[0]
-            publishPose(current_waypoint,pub)
+
+            
+
+            publishPose(pub_goal, current_waypoint)
         rate.sleep()
 
 
