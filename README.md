@@ -1,3 +1,5 @@
+# ICRSBot Magni Robot
+
 This repository contains all the code that runs on the ICRSBot's onboard Raspberry Pi. You can find the code that runs on the laptop in the [HCR_ICRS_Interaction repo](https://github.com/MITeo21/HCR_ICRS_Interaction).
 
 - The launch files have been heavily modified in [/magni_description](/magni_description) to support our robot configuration.
